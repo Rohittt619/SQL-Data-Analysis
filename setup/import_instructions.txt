@@ -6,6 +6,6 @@
 SELECT COUNT(*) FROM superstore;
 
 Expected rows:
-9994
+9694
 
 5. Run queries from queries folder
