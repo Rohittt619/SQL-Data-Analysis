@@ -27,6 +27,14 @@ SQL-Data-Analysis/
 │
 ├── data/
 │   └── superstore.csv                   # raw dataset
+│── images/
+│   ├── total_rows.png
+│   ├── total_orders.png
+│   ├── total_sales.png
+│   ├── total_profit.png
+│   ├── category_sales.png
+│   ├── window_function.png
+│   └── cte_output.png
 │
 ├── queries/
 │   ├── 01_basic_aggregations.sql
