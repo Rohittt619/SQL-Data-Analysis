@@ -1,0 +1,9 @@
+Dataset: Sample - Superstore
+
+Source:
+https://www.kaggle.com/datasets/vivek468/superstore-dataset-final
+
+Rows: 9994
+Columns: 21
+
+Used for SQL business analysis.

@@ -1,0 +1,11 @@
+1. Open MySQL Workbench
+2. Create database superstore_db
+3. Import Sample - Superstore.csv
+4. Verify import:
+
+SELECT COUNT(*) FROM superstore;
+
+Expected rows:
+9994
+
+5. Run queries from queries folder
