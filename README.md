@@ -1,4 +1,4 @@
-# 🗃️ SQL Data Analysis — Superstore Dataset
+��# 🗃️ SQL Data Analysis — Superstore Dataset
 
 > 15 business-driven SQL queries answering real analyst questions — from basic aggregations to advanced window functions and CTEs.
 
@@ -88,7 +88,7 @@ CREATE TABLE superstore (
 ```sql
 SELECT
     COUNT(DISTINCT order_id)    AS total_orders,
-    ROUND(SUM(sales), 2)        AS total_sales,
+    ROUND(SUM(sales), 2       AS total_sales,
     ROUND(SUM(profit), 2)       AS total_profit,
     ROUND(SUM(profit)
           / SUM(sales) * 100, 2) AS profit_margin_pct
@@ -106,10 +106,10 @@ FROM superstore;
 ```sql
 SELECT
     region,
-    ROUND(SUM(sales), 2)                     AS total_sales,
-    ROUND(SUM(profit), 2)                    AS total_profit,
-    ROUND(SUM(profit) / SUM(sales) * 100, 2) AS profit_margin_pct,
-    COUNT(DISTINCT order_id)                 AS total_orders
+    ROUND(SUM(sales), 2                    AS total_sales,
+    ROUND(SUM(profit), 2                   AS total_profit,
+    ROUND(SUM(profit/ SUM(sales) * 100, 2) AS profit_margin_pct,
+    COUNT(DISTINCT order_id                AS total_orders
 FROM  superstore
 GROUP BY region
 ORDER BY total_profit DESC;
@@ -126,9 +126,9 @@ ORDER BY total_profit DESC;
 ```sql
 SELECT
     sub_category,
-    ROUND(SUM(sales), 2)   AS total_sales,
-    ROUND(SUM(profit), 2)  AS total_profit,
-    ROUND(SUM(profit) / SUM(sales) * 100, 2) AS margin_pct
+    ROUND(SUM(sales), 2  AS total_sales,
+    ROUND(SUM(profit), 2 AS total_profit,
+    ROUND(SUM(profit/ SUM(sales) * 100, 2) AS margin_pct
 FROM  superstore
 GROUP BY sub_category
 ORDER BY total_profit DESC
@@ -146,7 +146,7 @@ LIMIT 5;
 ```sql
 SELECT
     sub_category,
-    ROUND(SUM(sales), 2)  AS total_sales,
+    ROUND(SUM(sales), 2 AS total_sales,
     ROUND(SUM(profit), 2) AS total_loss,
     COUNT(*)              AS order_count
 FROM  superstore
@@ -165,17 +165,17 @@ ORDER BY total_loss ASC;
 
 ```sql
 SELECT
-    YEAR(order_date)                  AS order_year,
-    MONTH(order_date)                 AS order_month,
+    YEAR(order_date                 AS order_year,
+    MONTH(order_date                AS order_month,
     DATE_FORMAT(order_date, '%b %Y')  AS month_label,
     ROUND(SUM(sales), 2)              AS monthly_sales,
-    ROUND(SUM(profit), 2)             AS monthly_profit
+    ROUND(SUM(profit), 2            AS monthly_profit
 FROM  superstore
 GROUP BY order_year, order_month, month_label
 ORDER BY order_year, order_month;
 ```
 
-**Key insight:** Q4 (Oct–Dec) consistently accounts for ~30% of annual revenue.
+**Key insight:** Q4 (Oct–Decconsistently accounts for ~30% of annual revenue.
 
 ---
 
@@ -186,11 +186,11 @@ ORDER BY order_year, order_month;
 ```sql
 SELECT
     segment,
-    COUNT(DISTINCT customer_id)      AS unique_customers,
+    COUNT(DISTINCT customer_id     AS unique_customers,
     COUNT(DISTINCT order_id)         AS total_orders,
     ROUND(SUM(sales), 2)             AS total_sales,
     ROUND(SUM(profit), 2)            AS total_profit,
-    ROUND(AVG(sales), 2)             AS avg_order_value,
+    ROUND(AVG(sales), 2            AS avg_order_value,
     ROUND(SUM(profit)
           / SUM(sales) * 100, 2)     AS profit_margin_pct
 FROM  superstore
@@ -215,7 +215,7 @@ SELECT
         WHEN discount <= 0.30      THEN '21–30%'
         ELSE '> 30% — Heavy discount'
     END                            AS discount_band,
-    COUNT(*)                       AS order_count,
+    COUNT(*                      AS order_count,
     ROUND(SUM(sales), 2)           AS total_sales,
     ROUND(SUM(profit), 2)          AS total_profit,
     ROUND(AVG(profit), 2)          AS avg_profit_per_order
@@ -240,7 +240,7 @@ SELECT
     COUNT(DISTINCT order_id)   AS total_orders,
     ROUND(SUM(sales), 2)       AS total_revenue,
     ROUND(SUM(profit), 2)      AS total_profit,
-    ROUND(AVG(sales), 2)       AS avg_order_value
+    ROUND(AVG(sales), 2      AS avg_order_value
 FROM  superstore
 GROUP BY customer_id, customer_name, segment
 ORDER BY total_revenue DESC
@@ -259,11 +259,11 @@ SELECT DISTINCT
     customer_name,
     segment
 FROM superstore
-WHERE YEAR(order_date) = 2016
+WHERE YEAR(order_date= 2016
   AND customer_id NOT IN (
       SELECT DISTINCT customer_id
       FROM   superstore
-      WHERE  YEAR(order_date) = 2017
+      WHERE  YEAR(order_date= 2017
   )
 ORDER BY customer_name;
 ```
@@ -282,9 +282,9 @@ SELECT
     product_name,
     category,
     sub_category,
-    COUNT(*)              AS loss_orders,
+    COUNT(*             AS loss_orders,
     ROUND(SUM(profit), 2) AS total_loss,
-    ROUND(MIN(discount), 2) AS min_discount,
+    ROUND(MIN(discount), 2AS min_discount,
     ROUND(MAX(discount), 2) AS max_discount
 FROM  superstore
 WHERE profit < 0
@@ -302,8 +302,8 @@ LIMIT 10;
 
 ```sql
 SELECT
-    DATE_FORMAT(order_date, '%Y-%m')        AS month,
-    ROUND(SUM(sales), 2)                    AS monthly_sales,
+    DATE_FORMAT(order_date, '%Y-%m'       AS month,
+    ROUND(SUM(sales), 2                   AS monthly_sales,
     ROUND(SUM(SUM(sales)) OVER (
         PARTITION BY YEAR(order_date)
         ORDER BY DATE_FORMAT(order_date, '%Y-%m')
@@ -314,7 +314,7 @@ GROUP BY YEAR(order_date), DATE_FORMAT(order_date, '%Y-%m')
 ORDER BY month;
 ```
 
-**Key concept:** `SUM() OVER (PARTITION BY year ORDER BY month)` resets the running total at the start of each year.
+**Key concept:** `SUM(OVER (PARTITION BY year ORDER BY month)` resets the running total at the start of each year.
 
 ---
 
@@ -327,11 +327,11 @@ SELECT
     category,
     sub_category,
     ROUND(SUM(sales), 2)  AS total_sales,
-    ROUND(SUM(profit), 2) AS total_profit,
-    RANK() OVER (
+    ROUND(SUM(profit), 2AS total_profit,
+    RANK(OVER (
         PARTITION BY category
         ORDER BY SUM(sales) DESC
-    )                     AS sales_rank_in_category
+                        AS sales_rank_in_category
 FROM  superstore
 GROUP BY category, sub_category
 ORDER BY category, sales_rank_in_category;
@@ -346,8 +346,8 @@ ORDER BY category, sales_rank_in_category;
 ```sql
 WITH monthly_sales AS (
     SELECT
-        DATE_FORMAT(order_date, '%Y-%m')  AS month,
-        ROUND(SUM(sales), 2)              AS sales
+        DATE_FORMAT(order_date, '%Y-%m' AS month,
+        ROUND(SUM(sales), 2             AS sales
     FROM  superstore
     GROUP BY month
 ),
@@ -357,10 +357,10 @@ with_growth AS (
         sales,
         LAG(sales, 1) OVER (ORDER BY month)  AS prev_month_sales,
         ROUND(
-            (sales - LAG(sales,1) OVER (ORDER BY month))
+            (sales - LAG(sales,1OVER (ORDER BY month))
             / NULLIF(LAG(sales,1) OVER (ORDER BY month), 0) * 100,
             1
-        )                                     AS mom_growth_pct
+                                            AS mom_growth_pct
     FROM monthly_sales
 )
 SELECT *
@@ -382,7 +382,7 @@ SELECT
     COUNT(*)                                         AS order_count,
     ROUND(AVG(profit), 2)                            AS avg_profit,
     ROUND(SUM(profit), 2)                            AS total_profit,
-    ROUND(SUM(sales), 2)                             AS total_sales
+    ROUND(SUM(sales), 2                            AS total_sales
 FROM  superstore
 GROUP BY ship_mode
 ORDER BY avg_ship_days;
@@ -403,8 +403,8 @@ WITH state_summary AS (
         region,
         ROUND(SUM(sales), 2)                       AS total_sales,
         ROUND(SUM(profit), 2)                      AS total_profit,
-        ROUND(SUM(profit) / SUM(sales) * 100, 2)   AS margin_pct,
-        COUNT(DISTINCT order_id)                    AS total_orders,
+        ROUND(SUM(profit) / SUM(sales* 100, 2  AS margin_pct,
+        COUNT(DISTINCT order_id                   AS total_orders,
         RANK() OVER (ORDER BY SUM(sales) DESC)      AS sales_rank
     FROM  superstore
     GROUP BY state, region
@@ -426,7 +426,7 @@ ORDER BY margin_pct ASC;
 |---|---|---|
 | 1 | Overall performance | 12.5% profit margin on $2.3M revenue |
 | 2 | Region breakdown | East is most efficient; Central is weakest |
-| 3 | Best sub-categories | Copiers (37% margin), Accessories (16%) |
+| 3 | Best sub-categories | Copiers (37% margin), Accessories (16%|
 | 4 | Loss-making products | Tables: −$17K loss on $206K sales |
 | 5 | Seasonality | Q4 = 30%+ of annual revenue every year |
 | 6 | Segments | Corporate has best margin; Consumer most volume |
@@ -460,7 +460,7 @@ ORDER BY margin_pct ASC;
 
 ## 🚀 How to Run
 
-1. Install MySQL or PostgreSQL (or use [DB Fiddle](https://www.db-fiddle.com/) online — no install needed)
+1. Install MySQL or PostgreSQL (or use [DB Fiddle](https://www.db-fiddle.com/online — no install needed)
 2. Run `setup/create_table.sql` to create the table
 3. Import `data/superstore.csv` into the table
 4. Run any `.sql` file in the `queries/` folder
