@@ -27,6 +27,7 @@ SQL-Data-Analysis/
 │
 ├── data/
 │   └── superstore.csv                   # raw dataset
+│
 │── images/
 │   ├── total_rows.png
 │   ├── total_orders.png
