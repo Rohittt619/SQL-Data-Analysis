@@ -1,4 +1,4 @@
-��# 🗃️ SQL Data Analysis — Superstore Dataset
+🗃️ SQL Data Analysis — Superstore Dataset
 
 > 15 business-driven SQL queries answering real analyst questions — from basic aggregations to advanced window functions and CTEs.
 
